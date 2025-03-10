@@ -1,0 +1,26 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif,
+    "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+}
+
+
+input {
+  border-color: #aaa;
+  border-width: 1px;
+  border-radius: 3px;
+  margin: 5px;
+  padding: 2px;
+}
+
+button {
+  border: 20px;
+  background-color: #ccc;
+  padding: 3px 5px;
+  border-radius: 3px;
+}
+
+span.itempack {
+  margin: 0px 20px;
+}
