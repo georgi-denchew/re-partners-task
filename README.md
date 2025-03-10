@@ -2,9 +2,9 @@
 
 This repository contains the backend application for the RE Partners Software Engineering Challenge.
 
-The application is written in Golang and exposes an HTTP API for interaction.
-The backend API is accessible through <http://3.71.13.28:3000> (example usage described bellow)
-The frontend is available [here](http://gi-re-partners-fe.s3-website.eu-central-1.amazonaws.com/)
+The backend application is written in Golang and exposes an HTTP API for interaction.  
+The backend API is accessible through <http://3.71.13.28:3000> (example usage described bellow).  
+The frontend (written in React/TypeScript) is available [here](http://gi-re-partners-fe.s3-website.eu-central-1.amazonaws.com/).
 
 ## Endpoints
 
