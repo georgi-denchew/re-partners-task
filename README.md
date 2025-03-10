@@ -3,7 +3,8 @@
 This repository contains the backend application for the RE Partners Software Engineering Challenge.
 
 The application is written in Golang and exposes an HTTP API for interaction.
-It is accessible through <http://3.70.72.6:3000> (example usage described bellow)
+The backend API is accessible through <http://3.71.13.28:3000> (example usage described bellow)
+The frontend is available [here](http://gi-re-partners-fe.s3-website.eu-central-1.amazonaws.com/)
 
 ## Endpoints
 
@@ -27,7 +28,7 @@ Creates a new order
 #### Example cURL
 
 ```sh
-curl -X POST -H "Content-Type: application/json" --data '{"items_count": 4200}' http://3.70.72.6:3000/orders
+curl -X POST -H "Content-Type: application/json" --data '{"items_count": 4200}' http://3.71.13.28:3000/orders
 ```
 
 #### Example Response
@@ -49,7 +50,7 @@ curl -X POST -H "Content-Type: application/json" --data '{"items_count": 4200}' 
 
 ### `GET /orders`
 
-Retrieves orders
+Retrieves stored orders
 
 #### Query Parameters
 
@@ -59,15 +60,54 @@ Retrieves orders
 
 #### Responses
 
-> | http code | content-type       | response                                                   |
-> |-----------|--------------------|------------------------------------------------------------|
-> | `200`     | `application/json` | `{"item_packs": [{"items": 250,"packs": 1}]}`              |
-> | `400`     | `application/json` | `{"message": "field 'items_count' cannot be less than 1"}` |
+> | http code | content-type       | response                                                                                 |
+> |-----------|--------------------|------------------------------------------------------------------------------------------|
+> | `200`     | `application/json` | `[{"created_at":"2025-03-10T23:09:59.42748779Z","item_packs":[{"items":250,"packs":1}]}]`|
+> | `400`     | `application/json` | ``                               |
 
 #### Example cURL
 
 ```sh
-curl -X POST -H "Content-Type: application/json" --data '{"items_count": 4200}' http://3.70.72.6:3000/orders
+curl http://3.71.13.28:3000/orders
+```
+
+#### Example Response
+
+```json
+[
+  {"created_at":"2025-03-10T23:25:48.858290938Z","item_packs":[{"items":250,"packs":1},{"items":500,"packs":1}]}
+  {"created_at":"2025-03-10T23:09:59.42748779Z","item_packs":[{"items":250,"packs":1}]}
+]
+```
+
+### `PUT /admin/packs`
+
+Replaces the available item packs in the application. Requires Basic Auth credentials - admin:password
+
+#### Body Parameters
+
+> | name        | type     | data type | description                                 |
+> |-------------|----------|-----------|---------------------------------------------|
+> | packs       | required | Number[]  | Array with the available pack sizes         |
+
+#### Responses
+
+> | http code | content-type       | response                                                   |
+> |-----------|--------------------|------------------------------------------------------------|
+> | `201`     | `application/json` | `{"item_packs": [{"items": 250,"packs": 1}]}`              |
+> | `400`     | `application/json` | `{"message": "invalid request body"}`                      |
+
+#### Example cURL
+
+**Disclaimer**: Basic auth credentials are only left in the example for convenience. They shouldn't be here in real-world application.
+
+```sh
+curl --request PUT 'http://3.71.13.28:3000/admin/packs' \
+--header 'Content-Type: application/json' \
+--header 'Authorization: Basic YWRtaW46cGFzc3dvcmQ=' \
+--data '{
+    "packs":[250,500,1000,2000,5000]
+}'
 ```
 
 #### Example Response
@@ -108,7 +148,7 @@ The following is a list of purposefully made decisions:
 
 - the application is containerized using Docker and hosted on AWS ECS hosted
 - the frontend is kept in the same repository for simplicity
-  - it is also containerized and runs on ECS
+- the frontend is hosted in an S3 bucket
 - `PACK_SIZES` are configurable through an environment variable
 - `PACK_SIZES` can also be replaced using `PUT /admin/packs`
 - unit tests run as part of the image build process
