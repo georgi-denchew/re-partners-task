@@ -140,6 +140,8 @@ curl --request PUT 'http://3.71.13.28:3000/admin/packs' \
 
 ### Run application
 
+`go run main.go`
+
 ## Implementation decisions
 
 The following is a list of purposefully made decisions:
