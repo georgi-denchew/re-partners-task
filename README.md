@@ -138,8 +138,6 @@ curl --request PUT 'http://3.71.13.28:3000/admin/packs' \
   PACK_SIZES=5000,250,500,1000,2000
   ```
 
-- you can also optionally provide `PORT` to specify which port will the application listen on
-
 ### Run application
 
 ## Implementation decisions
