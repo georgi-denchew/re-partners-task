@@ -13,8 +13,6 @@ type ItemPack = {
     readonly packs: Number;
 }
 
-
-
 export default function Index() {
     const [itemsCount, setItemsCount] = useState(0);
     const [orders, setOrders] = useState(Array<Order>);
@@ -49,14 +47,13 @@ export default function Index() {
             <Admin/>
             <main className="flex justify-center pt-16 pb-4">
                 <form action={createOrder} >
-                    <input type="number" placeholder="Add items" name="newTask" value={itemsCount} onChange={(e) => setItemsCount(Number(e.target.value))} />
+                    <input type="number" placeholder="Add items" name="newTask" onChange={(e) => setItemsCount(Number(e.target.value))} />
                     <button type="submit">Create Order</button>
                 </form>
 
             </main>
             <div className="flex justify-center">
                 <ul>
-
                     {orders.map((order, index) => {
                         return (<li key={`li-order-${index}`} className="justify">
                             <span key={`li-order-span-${index}`} className="flex">
@@ -64,7 +61,7 @@ export default function Index() {
                                 {order.item_packs.map((itemPack, ipIndex) => {
                                     return (
                                         <span className="itempack" key={`li-order-span-${index}-itemPack-${ipIndex}`}>
-                                            {itemPack.items} items: {itemPack.packs} packs
+                                            {`${itemPack.items} items: ${itemPack.packs} packs`}
                                         </span>)
                                 })}
                             </span>
