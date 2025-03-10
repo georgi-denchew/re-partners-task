@@ -149,6 +149,7 @@ The following is a list of purposefully made decisions:
 - the application is containerized using Docker and hosted on AWS ECS hosted
 - the frontend is kept in the same repository for simplicity
 - the frontend is hosted in an S3 bucket
+- the frontend only displays the latest 20 orders.
 - `PACK_SIZES` are configurable through an environment variable
 - `PACK_SIZES` can also be replaced using `PUT /admin/packs`
 - unit tests run as part of the image build process
